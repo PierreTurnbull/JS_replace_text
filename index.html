@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find And Replace</title>
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: arial, sans-serif;
+        }
+
+        main {
+            max-width: 500px;
+            border: 1px solid #000;
+            padding: 20px;
+            margin: 20px auto;
+        }
+
+        .found-count {
+            text-align: center;
+            color: navy;
+            font-size: 24px;
+        }
+
+        input[type="text"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 18px;
+            border: 0;
+            border-bottom: 1px solid #000;
+        }
+
+        input[type="submit"] {
+            display: block;
+            max-width: 200px;
+            width: 100%;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            margin: auto;
+            padding: 20px;
+            border: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <form>
+            <p>
+                <label for="find">Find : </label>
+                <input type="text" id="find" autocomplete="off">
+            </p>
+            <p>
+                <label for="replace">Replace : </label>
+                <input type="text" id="replace" autocomplete="off">
+            </p>
+            <p><input type="submit" value="DO IT ! JUST DO IT !"></p>
+        </form>
+
+        <p class="found-count">We found and replaced <strong id="nb">0</strong> times</p>
+
+        <article>
+            <h1>Nekfeu - Egérie</h1>
+            <p>Je suis devenu celui dont aurait rêvé celui que je rêvais d'être</p>
+            <p>Tu me suis ? Je ne veux pas me réveiller</p>
+            <p>Une marque de luxe m'a dit on veut pas de rap, tu connais les che-ri</p>
+            <p>J'ai dit tant pi, tranquille, moi je parle ap</p>
+            <p>Le lendemain je me suis tapé leur egérie</p>
+            <p>Elle avait le visage de Nathalie Portman</p>
+            <p>Elle m'a dit moi non plus je ne veux pas de vie de couple</p>
+            <p>Cette nuit je veux me coupé de mon ce monde qui dégoûte</p>
+            <p>Bébé vient dans mon hotel et on éteint les portables</p>
+            <p>J'en connais un rayon, je ne raconte pas de disquette</p>
+            <p>Elle a mordu l'oreillé comme si c'était un cheesecake</p>
+            <p>Mais c'est toujours la même</p>
+            <p>Elle a tenu mes mains</p>
+            <p>Elle m'a dit tu m'aimes ?</p>
+            <p>J'ai dit non tu m'émeu</p>
+            <p>Je le répète je n'ai pas de repère</p>
+            <p>Tu n'es pas la seule vraie perle de mon repertoire</p>
+            <p>Un soir pété sous les réverbères</p>
+            <p>Peut être que je me retournerai vers toi</p>
+        </article>
+    </main>
+      <script type="text/javascript">
+      var count;
+      var input;
+      var number = document.querySelector("#nb");
+      var text_dom = document.querySelectorAll("article p");
+      var click = document.querySelector("input[type=submit]");
+      var form = document.querySelector("form");
+
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        count = 0;
+        input = document.querySelector("#find").value;
+        for (let i = 0; i < text_dom.length; i++) {
+          let j = 0;
+          while (text_dom[i].textContent.indexOf(input, j) > -1) {
+            count++;
+            text_dom[i].textContent = text_dom[i].textContent.replace(input, replace.value);
+            j = text_dom[i].textContent.indexOf(input,j) + 1;
+          }
+        }
+        number.textContent = count;
+      });
+      </script>
+</body>
+</html>
