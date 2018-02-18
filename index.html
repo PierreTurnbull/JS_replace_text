@@ -66,7 +66,7 @@
             <p><input type="submit" value="DO IT ! JUST DO IT !"></p>
         </form>
 
-        <p class="found-count">We found and replaced <strong id="nb">0</strong> times</p>
+        <p class="found-count">We found and replaced <strong>0</strong> times</p>
 
         <article>
             <h1>Nekfeu - Egérie</h1>
@@ -91,28 +91,37 @@
             <p>Peut être que je me retournerai vers toi</p>
         </article>
     </main>
-      <script type="text/javascript">
-      var count;
-      var input;
-      var number = document.querySelector("#nb");
-      var text_dom = document.querySelectorAll("article p");
-      var click = document.querySelector("input[type=submit]");
-      var form = document.querySelector("form");
+    <script type="text/javascript">
+      var form       = document.querySelector("form");
+      var p_list     = document.querySelectorAll("article p");
+      var find;
+      var replace;
+      var count_text = document.querySelector(".found-count strong");
 
       form.addEventListener("submit", function(event) {
+        let count = 0;
         event.preventDefault();
-        count = 0;
-        input = document.querySelector("#find").value;
-        for (let i = 0; i < text_dom.length; i++) {
-          let j = 0;
-          while (text_dom[i].textContent.indexOf(input, j) > -1) {
-            count++;
-            text_dom[i].textContent = text_dom[i].textContent.replace(input, replace.value);
-            j = text_dom[i].textContent.indexOf(input,j) + 1;
+        find    = document.querySelector("#find").value;
+        replace = document.querySelector("#replace").value;
+        for (let i = 0; i < p_list.length; i++) {
+          // Count all occurences of the searched string in each paragraph
+          for (let j = 0; j < p_list[i].textContent.length; j++) {
+            let k;
+            for (k = 0; k < find.length; k++) {
+              if (p_list[i].textContent[j + k] !== find[k]) {
+                break;
+              }
+            }
+            if (k == find.length) {
+              count++;
+            }
           }
+          // Replace all occurences of the searched string in each paragraph
+          exp = new RegExp(find, "g");
+          p_list[i].textContent = p_list[i].textContent.replace(exp, replace);
         }
-        number.textContent = count;
+        count_text.textContent = String(count);
       });
-      </script>
+    </script>
 </body>
 </html>
